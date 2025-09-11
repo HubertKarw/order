@@ -1,5 +1,6 @@
 package com.hubertkarw.order.exception;
 
+import com.hubertkarw.order.model.ErrorMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,8 @@ import java.time.LocalDateTime;
 public class OrderAppExceptionHandler {
 
     @ExceptionHandler(OrderAppException.class)
-    ResponseEntity<ErrorMessage> handleProductAppException(CartAppException exception) {
-        log.warn("ProductAppException: status={}, message={}", exception.getStatus(), exception.getMessage());
+    ResponseEntity<ErrorMessage> handleProductAppException(OrderAppException exception) {
+        log.warn("OrderAppException: status={}, message={}", exception.getStatus(), exception.getMessage());
         return ResponseEntity.status(exception.getStatus())
                 .body(new ErrorMessage(exception.getStatus().value(), exception.getStatus().getReasonPhrase(), exception.getMessage(), exception.getTimestamp()));
     }
