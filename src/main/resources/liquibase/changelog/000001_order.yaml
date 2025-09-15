@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: HubertKarw
+      changes:
+        - createTable:
+            tableName: ORDERS
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: CART_ID
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+
+        - createTable:
+            tableName: ORDER_ITEM
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRICE
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ORDER_ID
+                  type: BIGINT
+
+        - createTable:
+            tableName: ORDER_ITEM_CUSTOMIZATION
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TYPE
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRICE
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ORDER_ITEM_ID
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: ORDER_ITEM
+            baseColumnNames: ORDER_ID
+            referencedTableName: ORDERS
+            referencedColumnNames: ID
+            constraintName: fk_order_item_order
+
+        - addForeignKeyConstraint:
+            baseTableName: ORDER_ITEM_CUSTOMIZATION
+            baseColumnNames: ORDER_ITEM_ID
+            referencedTableName: ORDER_ITEM
+            referencedColumnNames: ID
+            constraintName: fk_order_item_customization_order_item
+

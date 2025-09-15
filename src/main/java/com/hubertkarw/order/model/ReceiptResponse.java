@@ -1,4 +1,4 @@
 package com.hubertkarw.order.model;
 
-public class OrderCreateDTO {
+public class ReceiptResponse {
 }
